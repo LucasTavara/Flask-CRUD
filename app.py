@@ -3,7 +3,7 @@ from Models.Tasks import Task
 
 app = Flask(__name__)
 
-task = []
+tasks = []
 task_id_control = 1
 
 @app.route('/tasks', methods=['POST'])
@@ -12,9 +12,19 @@ def create_task():
    data = request.get_json()
    new_task = Task(id=task_id_control, title=data['title'], description=data.get("description", ""))
    task_id_control + 1
-   task.append(new_task)
-   print(task)
+   tasks.append(new_task)
+   print(tasks)
    return jsonify({"menssage":"nova tarefa criada com sucesso!"})
+
+@app.route('/tasks', methods=['GET'])
+def lista_task():  
+     task_list = [Task.to_dict() for Task in tasks]
+
+     output = {
+       "task": task_list,
+       "total_task": 0
+      }
+     return jsonify(output)
 
 if __name__ =="__main__":
  app.run(debug=True)
