@@ -1,3 +1,3 @@
 # TASK-FLASK-CRUD
 
-Esse repositorio foi criado agora 
+Criando um crud com python
